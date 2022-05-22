@@ -1,0 +1,7 @@
+﻿
+<div>
+    @if (User.Identity.IsAuthenticated) // такое ощущение , что тут надо что-то доработать, как минимум внешний вид... 
+    {
+      <a asp-controller="CompanyTb" asp-action="UserIdentity" asp-route-UserName="@User.Identity.Name">My Company</a> 
+    }
+</div>

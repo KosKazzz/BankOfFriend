@@ -1,0 +1,36 @@
+﻿@model WebAppBoFv3.Models.CompAvatar
+@{
+    ViewData["Title"] = "Изменить Аватар";
+}
+<h1>Изменить логотип</h1>
+<hr />
+<div style="margin-left:200px;">
+    <form  class="bodyformforCreatComp bodyformforEditAvatar" method="post" enctype="multipart/form-data" asp-action="SaveAvatar" asp-controller="CompanyTb">
+
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Org_name" />
+        <input type="hidden" asp-for="Region" />
+        <input type="hidden" asp-for="INN" />
+        <input type="hidden" asp-for="KPP" />
+        <input type="hidden" asp-for="OGRN" />
+        <input type="hidden" asp-for="Account_number" />
+        <input type="hidden" asp-for="Org_phone" />
+        <input type="hidden" asp-for="Org_email" />
+        <input type="hidden" asp-for="Info" />
+        <input type="hidden" asp-for="Surname" />
+        <input type="hidden" asp-for="Name" />
+        <input type="hidden" asp-for="Patronymic" />
+        <input type="hidden" asp-for="Phone" />
+        <input type="hidden" asp-for="Email" />
+        <div class="inputfile">
+            <label for="inp" class="inp box_logo">
+                <input class="fileid" asp-for="Avatar" type="file" id="inp" placeholder="&nbsp;">
+                <span asp-validation-for="Avatar" class="label logolabel">Логотип вашей компани**</span>
+                <small>Выберете картинку для закгрузки</small>
+            </label>
+        </div>
+        <div style="display: flex;">
+            <input type="submit" value="Сохранить" class="floating-button floating-button-add" />
+        </div>
+    </form>
+</div>

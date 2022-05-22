@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebAppBoFv3.Models.Company>
+    @{
+        ViewData["Title"] = "Главная";
+        
+    }
+
+    <div class="text-center">
+        <h1 class="display-4">Добро пожаловать</h1><br /><br /><br />
+        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+        <form method="get">
+            <p>
+                <input type="text" name="SearchString" size="80" />
+                <input type="submit" asp-controller="CompanyTb" asp-action="SearchResult" value="Поиск" />
+            </p>
+        </form><br /><br /><br />
+        <article>
+            <p> Тут должно быть краткое описание того, что это такое и зачем это надо! Но мне пока лень писать этот текст...</p>
+            @*<ul>
+                       <li>
+                           Добавить класс с амедия который меняет длинну строку поиска в зависимости от ширины экрана
+                       </li>
+                       <li>
+                           Починить конпки в профиле админа
+                       </li>
+                </ul>*@
+        </article>
+    </div>
+    <div class="text-center button">
+        <table>
+            @foreach (var item in Model)
+            {<tr>
+                <td>@if (item.Image != null)
+                {
+                            <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))" />
+                }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Org_name)</td>
+                </tr>}
+        </table>
+    </div>

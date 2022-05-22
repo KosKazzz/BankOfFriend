@@ -1,0 +1,127 @@
+﻿@model WebAppBoFv3.Models.Company
+@{
+    ViewData["Title"] = "EditComp";
+}
+<h1>Редактировать запись о компании :</h1>
+<hr />
+          <form class="bodyformforCreatComp bodyformforEditComp registrationform"asp-action="EditComp" asp-controller="CompanyTb"
+                    asp-route-UserName="@User.Identity.Name" enctype="multipart/form-data" method="post">
+                    
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Image" />
+                    <input type="hidden" asp-for="Email" />
+                
+                    <label for="inp" class="inp box_compname" >
+                    <input asp-for="Org_name"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Org_name" class="label">Название компании *</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_adress_region">
+                    <input asp-for="Region" type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Region" class="label">Адресс компании*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_inn">
+                    <input asp-for="INN"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="INN" class="label">ИНН*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <div class="inp box_logo_show">
+                         @if (Model.Image != null)
+                        { 
+                        <img style='width:200px; height:200px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" />
+                         } 
+                    </div>
+
+                    <label for="inp" class="inp box_phone">
+                    <input asp-for="Org_phone"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Org_phone" class="label">Телефон*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_mail">
+                    <input asp-for="Org_email"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Org_email" class="label">е-мэил*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <div class="box_info">
+                    <label for="inp" >
+                    <textarea class="textarea_info" asp-for="Info"  type="text" id="inp" ></textarea>
+                    <br/>
+                    <small>Рекламный текс о вашей компании</small>
+                    </label>
+                    </div>
+                
+                    <label for="inp" class="inp box_kpp">
+                    <input asp-for="KPP"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="KPP" class="label">КПП</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_ogrn">
+                    <input asp-for="OGRN" type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="OGRN" class="label">ОГРН</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_acc">
+                    <input asp-for="Account_number"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Account_number" class="label">Номер счета в нашем банке</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_sur">
+                    <input asp-for="Surname"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Surname" class="label">Пока"фамилия"</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_name_yat">
+                    <input asp-for="Name"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Name" class="label">Пока"имя"</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_otch">
+                    <input asp-for="Patronymic"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Patronymic" class="label">Пока"Отчество"</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_phone_2">
+                    <input asp-for="Phone"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Phone" class="label">Пока"Ещё один телефон"</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_mail_2">
+                    <input asp-for="Email"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Email" class="label">Ещё один емаил, котрыйдолжен заполняться автоматически</span>
+                    <span class="focus-bg"></span>
+                    </label>
+                 
+                    <div class="button box_button">
+                    <input type="submit" value="Сохранить" class="regbutton floating-button floating-button-add" />
+                    </div>
+                    
+                    <div class="button box_button_edit">
+                        <a class="floating-button" asp-controller="CompanyTb" asp-action="EditAvatar" asp-route-id="@Model.Id "> Изменить логотип </a>
+                    </div>
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="box-back_to_main regbutton button">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Back to Main</a>
+                    </div>
+                </form>
+<hr />     
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+          
+        

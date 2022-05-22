@@ -1,0 +1,118 @@
+﻿@model WebAppBoFv3.Models.CompAvatar
+@{
+    ViewData["Title"] = "CreateComp";
+}
+@**@
+<h1>Форма регистрации</h1>
+<h4>Новая огранизация</h4>
+<hr />
+          <form class="bodyformforCreatComp registrationform"asp-action="CreateComp" asp-controller="CompanyTb"
+                    asp-route-UserName="@User.Identity.Name" enctype="multipart/form-data" method="post">
+                
+                    <label for="inp" class="inp box_compname" >
+                    <input asp-for="Org_name"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Org_name" class="label">Название компании *</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_adress_region">
+                    <input asp-for="Region" type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Region" class="label">Адресс компании*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_inn">
+                    <input asp-for="INN"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="INN" class="label">ИНН*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <div class="inputfile">
+                        <label for="inp" class="inp box_logo">
+                            <input class="fileid" asp-for="Avatar" type="file" id="inp" placeholder="&nbsp;">
+                            <span asp-validation-for="Avatar" class="label logolabel">Логотип вашей компани**</span>
+                            <small>Выберете картинку для закгрузки</small>
+                        </label>
+                    </div>
+                    
+                    <label for="inp" class="inp box_phone">
+                    <input asp-for="Org_phone"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Org_phone" class="label">Телефон*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_mail">
+                    <input asp-for="Org_email"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Org_email" class="label">е-мэил*</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <div class="box_info">
+                    <label for="inp" >
+                    <textarea class="textarea_info" asp-for="Info"  type="text" id="inp" placeholder="Информация о компании**"></textarea>
+                    <small>Напишите в поле выше всё,что вы хотите рассказать о своей организации.Прорекламируйте её!</small>
+                    </label>
+                    </div>
+                
+                    <label for="inp" class="inp box_kpp">
+                    <input asp-for="KPP"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="KPP" class="label">КПП</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_ogrn">
+                    <input asp-for="OGRN" type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="OGRN" class="label">ОГРН</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_acc">
+                    <input asp-for="Account_number"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Account_number" class="label">Номер счета в нашем банке</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_sur">
+                    <input asp-for="Surname"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Surname" class="label">Фамилия</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_name_yat">
+                    <input asp-for="Name"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Name" class="label">Имя"</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_otch">
+                    <input asp-for="Patronymic"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Patronymic" class="label">Отчество</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_phone_2">
+                    <input asp-for="Phone"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Phone" class="label">Телефон</span>
+                    <span class="focus-bg"></span>
+                    </label>
+
+                    <label for="inp" class="inp box_mail_2">
+                    <input asp-for="Email"  type="text" id="inp" placeholder="&nbsp;">
+                    <span asp-validation-for="Email" class="label">емаил</span>
+                    <span class="focus-bg"></span>
+                    </label>
+                 
+                    <div class="button box_button">
+                    <input type="submit" value="Разместить" class="regbutton floating-button floating-button-add" />
+                    </div>
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="box-back_to_main regbutton button">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" >Назад к списку</a>
+                    </div>
+                </form>
+<hr />     
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

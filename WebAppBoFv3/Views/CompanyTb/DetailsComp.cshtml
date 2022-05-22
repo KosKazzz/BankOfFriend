@@ -1,0 +1,176 @@
+﻿@model WebAppBoFv3.Models.Company
+@{
+    ViewData["Title"] = Model.Org_name;
+}
+@*<h1>Информация о компании</h1>
+<div>
+    <h4>@Html.DisplayFor(modell => modell.Org_name)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Название Организации
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Org_name)
+        </dd>
+        <dt class="col-sm-2">
+            Регион
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Region)
+        </dd>
+        <dt class="col-sm-2">
+            ИНН
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.INN)
+        </dd>
+        <dt class="col-sm-2">
+            КПП
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KPP)
+        </dd>
+        <dt class="col-sm-2">
+            ОГРН
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OGRN)
+        </dd>
+        <dt class="col-sm-2">
+            Номер счёта
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Account_number)
+        </dd>
+        <dt class="col-sm-2">
+            Телефон
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Org_phone)
+        </dd>
+        <dt class="col-sm-2">
+            Е-мэил
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Org_email)
+        </dd>
+        <dt class="col-sm-2">
+            Информация о компании
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt class="col-sm-2">
+            Фамилия
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            Имя
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Отчество
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+        <dt class="col-sm-2">
+            Телефон
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            Еmail
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>*@
+
+
+<div class="wrapper">
+    <div class="name_logo">
+        <div class="name">
+            <h1>@Html.DisplayFor(modell => modell.Org_name)</h1>
+            <p>Информация о компани</p>
+            <p>
+                @Html.DisplayFor(model => model.Info)
+            </p>
+            <dl class="ur-info-extended">
+                <dt>ИНН</dt>
+                <dd>@Html.DisplayFor(model => model.INN)</dd>
+            </dl>
+        </div>
+        <div class="logo">
+            @if (Model.Image != null)
+            {
+                <img id="imgLogoDeteils" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" />
+            }
+            @*<img id="imgLogoDeteils" src="C:\Users\User\Pictures\12467430.jpg">*@
+        </div>
+    </div>
+    <div class="Info">
+        <div class="adress-map">
+            <div class="adress">
+                <article>
+                    <p>@Html.DisplayFor(model => model.Region) </p> 
+
+                    <dl class="ur-info-extended">
+                        <dt>Телефон</dt>
+                        <dd>@Html.DisplayFor(model => model.Org_phone)</dd>
+                        <dt>e-mail</dt>
+                        <dd>@Html.DisplayFor(model => model.Org_email)</dd>
+                    </dl>
+                </article>
+            </div>
+            <div class="map-api" id="map">
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @if (User.IsInRole("admin"))
+    {<a asp-controller="CompanyTb" asp-action="EditComp" asp-route-id="@Model.Id">Edit</a>}
+</div>
+<div>
+    <a href="#" onclick="javascript:history.back(-1); return false;"> Back to List </a>
+</div>
+
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+        var address = '@Html.DisplayFor(model => model.Region)'; 
+        var myMap;
+        ymaps.geocode(address).then(function (res) {
+            myMap = new ymaps.Map('map', {
+                center: res.geoObjects.get(0).geometry.getCoordinates(),
+                zoom: 15,
+            });
+        });
+        var geocoder = ymaps.geocode(address);
+        //После того, как поиск вернул результат, вызывается callback-функция
+        geocoder.then(
+            function (res) {
+                // координаты объекта
+                var coordinates = res.geoObjects.get(0).geometry.getCoordinates();
+                // Добавление метки (Placemark) на карту
+                var placemark = new ymaps.Placemark(
+                    coordinates, {
+                    'hintContent': address,
+                    'balloonContent': 'Время работы: Пн-Пт, с 9 до 20'
+                }, {
+                    'preset': 'islands#redDotIcon'
+                }
+                );
+                myMap.geoObjects.add(placemark);
+            }
+        );
+    }
+</script>
